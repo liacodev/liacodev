@@ -13,8 +13,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;      /* Full screen */
+    min-height: 100svh;      /* Full screen */
     text-align: center;
+    padding: 60px 20px;
     background: #f7dfe9;
     background: linear-gradient(148deg, rgba(247, 223, 233, 1) 0%, rgba(149, 170, 191, 1) 68%);
   }
@@ -36,19 +37,20 @@ body {
   
   /* Menu Grid */
   .menu-grid {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 20px;
     width: 80%;
     max-width: 600px;
     animation: zoomIn 1s ease-out forwards;
+    justify-items: center;
   }
+
   
   .menu-item {
     text-decoration: none;
     font-weight: bold;
     font-size: 1rem;      /* smaller for mobile */
-    padding: 12px 20px;   /* reduces size to fit */
+    padding: 10px 14px;   /* reduces size to fit */
     background: white;
     border-radius: 10px;
     color: #333;
@@ -56,7 +58,7 @@ body {
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;   /* center text */
     width: 100%;          /* make it fill the grid cell */
-    max-width: 150px;     /* optional */
+    max-width: none;     /* optional */
   }
   
   .menu-item:hover {
@@ -64,6 +66,12 @@ body {
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   }
 
+  #my-story header {
+    margin: 40px;
+    padding-top: 50px;
+  }
+
+  
 
   /* Enable smooth scrolling for the whole page */
 html {
@@ -255,10 +263,6 @@ html {
     height: 24px;
   }
   
-  #my-story{
-    margin: 100px;
-    padding: 50px;
-  }
 
 /* Carousel container + slides */
 .carousel-container {
@@ -410,4 +414,43 @@ form {
     }
   }
   
-  
+  #my-story {
+    text-align: left;
+    margin: 18;
+    padding: 18;
+  }
+
+#my-story h1,
+#my-story h2,
+#my-story p {
+  max-width: 800px;
+  margin: 0 auto 20px auto;
+}
+
+.story-container {
+  max-width: 800px;
+  margin: 80px auto;
+  padding: 0 20px;
+  text-align: left;
+}
+
+.story-container h1 {
+  margin-bottom: 20px;
+}
+
+.story-container h2 {
+  margin-bottom: 30px;
+}
+
+.story-container p {
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .story-container {
+    margin: 40px auto;
+  }
+}
+@media (max-width: 480px) {
+
+}
