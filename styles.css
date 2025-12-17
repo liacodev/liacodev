@@ -71,19 +71,40 @@ body {
     padding-top: 50px;
   }
 
-  
+  .social-links {
+  margin: 20px auto;
+  max-width: 600px;   /* keeps it centered and not too wide */
+  padding: 0 15px;    /* adds breathing room on mobile */
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.social-links a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.social-links a:hover {
+  color: gray;
+}
+
+@media (max-width: 480px) {
+  .social-links {
+    font-size: 14px;  /* slightly smaller on small screens */
+  }
+}
+
 
   /* Enable smooth scrolling for the whole page */
 html {
     scroll-behavior: smooth;
   }  
 
-  a{
-    color: purple;
+  .social-links .emoji {
+    margin-right: 6px; /* adds space between the emoji and the text */
   }
-  a:visited{
-    color: gray;
-  }
+  
   /* Sections (Latter Part) */
   .section {
     padding: 60px 20px;
