@@ -70,14 +70,17 @@ body {
     margin: 40px;
     padding-top: 50px;
   }
-
+a{
+  color: inherit;
+}
   .social-links {
-  margin: 20px auto;
-  max-width: 600px;   /* keeps it centered and not too wide */
-  padding: 0 15px;    /* adds breathing room on mobile */
+  margin: 30px auto;
+  max-width: 600px;   
+  padding: 0 15px;  
   font-size: 16px;
   line-height: 1.6;
   text-align: center;
+  font-size: 18px;
 }
 
 .social-links a {
@@ -91,7 +94,7 @@ body {
 
 @media (max-width: 480px) {
   .social-links {
-    font-size: 14px;  /* slightly smaller on small screens */
+    font-size: 14px;  
   }
 }
 
@@ -110,7 +113,7 @@ html {
     padding: 60px 20px;
     max-width: 1000px;
     margin: 0 auto;
-    opacity: 0;           /* start hidden for fade-in */
+    opacity: 0;          
     transform: translateY(20px);
     transition: opacity 1s ease-out, transform 1s ease-out;
   }
@@ -230,16 +233,16 @@ html {
   
     .menu-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* smaller min width for mobile */
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
         gap: 15px;
-        width: 90%;           /* take most of screen width */
-        max-width: 600px;     /* optional max width */
+        width: 90%;         
+        max-width: 600px;     
         justify-items: center;
       }
       
   
     .projects-grid {
-      grid-template-columns: 1fr; /* stack cards vertically */
+      grid-template-columns: 1fr; 
       gap: 15px;
     }
   
@@ -249,12 +252,12 @@ html {
   }
   
   .card img {
-    width: 100%;              /* image fills the card width */
-    height: auto;             /* keeps aspect ratio */
-    border-radius: 10px;      /* optional: smooth corners */
-    margin-bottom: 10px;      /* spacing between img and text */
-    object-fit: cover;        /* ensures image fits nicely */
-    display: block;           /* removes inline spacing */
+    width: 100%;             
+    height: auto;           
+    border-radius: 10px;     
+    margin-bottom: 10px;      
+    object-fit: cover;        
+    display: block;          
 }
   #backToTop {
     position: fixed;
@@ -346,9 +349,6 @@ html {
     .carousel-container { max-width: 92%; }
   }
   
-  /* Keep fade-in section animation separate from carousel transforms.
-     If you have .fade-in that animates transform globally, ensure it targets the section only. */
-  
 h2{
     text-align: left;
 }
@@ -364,9 +364,9 @@ h2{
 /* Form container styling */
 form {
     max-width: 1000px;
-    margin: 0 auto; /* center on page */
+    margin: 0 auto; 
     padding: 30px;
-    background-color: #1f1f1f; /* dark background */
+    background-color: #1f1f1f; 
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     display: flex;
