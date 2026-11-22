@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Liacodev</title>
+  <title>Lia | Web Developer & Shopify Specialist</title>
+  <meta name="description" content="Thoughtful websites and Shopify experiences, designed and built by Lia, an independent web developer based in Japan.">
   <meta property="og:title" content="Liacodev"/>
   <meta property="og:description" content="Liacodev | Web Developer & Shopify Specialist"/>
   <meta property="og:image" content="https://liacodev.com/images/liacodev_logo.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,7 +20,7 @@
     <h1>LIACODEV</h1>
 
     <nav class="menu-grid">
-      <a href="#about" class="menu-item">My Story</a>
+      <a href="#services" class="menu-item">Services</a>
       <a href="#projects" class="menu-item">Projects</a>
       <a href="#contact" class="menu-item">Contact</a>
     </nav>
@@ -31,9 +32,10 @@
   <section id="about" class="section fade-in">
     <div class="about-container">
       <div class="about-card">
-        <h2>About Me</h2>
-        <p>Hello, I'm Lia, a web developer based in Japan. I code and design websites that help businesses and individuals build unique online platforms that reflect their vision. I understand the power of a well-crafted website to showcase your work and tell your story, and I’m here to help you shine online with Shopify setups and other web development projects.</p>
-        <p><a href="mystory.html">Read more</a></p>
+        <h2>Thoughtful websites, built with care.</h2>
+        <p>Hi, I’m Lia—a web developer in Japan. I build thoughtful, easy-to-use websites for growing businesses.</p>
+        <p><a href="#services">Explore services</a></p>
+        <button class="stardust-trigger" id="stardustButton" type="button" aria-label="Sprinkle a little stardust">✦ Sprinkle a little stardust</button>
       </div>
       <img id="lia_pic" src="2x2 portfolio pic.jpg" alt="Me">
     </div>
@@ -42,11 +44,65 @@
         <a href="https://www.upwork.com/freelancers/~01bcc91c85dceb26e0?mp_source=share">Upwork</a> | 
         <a href="#contact">Send an email</a>
       </p>
-      <p>Tools I use: HTML, CSS, JavaScript, Shopify Liquid</p>
+      <p>Web design · Shopify stores · Custom features · Ongoing care</p>
     </div>    
   </section>
   <br>
   <br>
+  <section id="services" class="section fade-in">
+    <p class="eyebrow">SERVICES DIRECTORY</p>
+    <h2>What can I help you with?</h2>
+    <p class="services-intro">Choose a topic to see how I can help.</p>
+    <div class="service-directory">
+      <div class="service-tabs" role="tablist" aria-label="Explore services">
+        <button class="service-tab active" id="tab-setup" role="tab" aria-selected="true" aria-controls="serviceBubble" tabindex="0" data-title="Shopify setup" data-copy="Start with a store that is set up cleanly. I can configure your theme, core settings, products, collections, and domain, then show you how to manage it yourself.">Shopify setup</button>
+        <button class="service-tab" id="tab-migration" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Website migration" data-copy="Move your existing website to Shopify while keeping the important pieces in view: key pages, products, images, domain connection, and a practical launch checklist.">Website migration</button>
+        <button class="service-tab" id="tab-theme" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Theme design & updates" data-copy="Make your Shopify theme feel more like your brand. I can refine layouts, colors, type, and mobile details using your current theme.">Theme design & updates</button>
+        <button class="service-tab" id="tab-liquid" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Liquid & custom features" data-copy="Need a section or storefront detail that the theme editor does not quite cover? I can customize Shopify themes with Liquid, HTML, CSS, and JavaScript.">Liquid & custom features</button>
+        <button class="service-tab" id="tab-apps" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Apps & integrations" data-copy="Find the right third-party app for your workflow, get it configured, and make sure it fits into your store setup.">Apps & integrations</button>
+        <button class="service-tab" id="tab-catalog" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Product images, SEO & catalog" data-copy="Get help preparing product images, organizing products into collections, writing SEO titles and descriptions, and setting up useful product metafields.">Images, SEO & catalog</button>
+        <button class="service-tab" id="tab-management" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Ongoing store management" data-copy="I can help keep your shop running with regular product and page updates, app checks, small improvements, and everyday Shopify tasks.">Store management</button>
+      </div>
+      <div class="service-bubble" id="serviceBubble" role="tabpanel" aria-labelledby="tab-setup" aria-live="polite" tabindex="0">
+        <span class="bubble-spark" aria-hidden="true">✦</span>
+        <h3 id="serviceTitle">Shopify setup</h3>
+        <p id="serviceCopy">Start with a store that is set up cleanly. I can configure your theme, core settings, products, collections, and domain, then show you how to manage it yourself.</p>
+        <a href="#contact" class="bubble-link">Tell me what you need <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="proof-strip">
+      <div><strong>24</strong><span>websites built so far</span></div>
+      <p>Shopify experience supporting stores in multi-million-dollar ecommerce businesses.</p>
+    </div>
+    <div class="pricing-heading" id="pricing">
+      <p class="eyebrow">CLEAR STARTING PRICES · USD</p>
+      <h2>Pick a starting point. We’ll shape the scope together.</h2>
+      <p>Fixed-price packages for focused Shopify projects, with clear limits and room to add what your store needs.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="price-card">
+        <p class="price-label">QUICK FIX</p><h3>Shopify Tune-Up</h3><p class="price">$200</p>
+        <p class="price-summary">A focused update to make your store work better.</p>
+        <ul><li>One small theme or Liquid improvement</li><li>Connect or configure one Shopify app</li><li>SEO title and meta description for up to 5 products</li><li>Image resizing and upload for up to 5 products</li></ul>
+        <a href="#contact" class="price-cta">Ask about a tune-up</a>
+      </article>
+      <article class="price-card featured">
+        <p class="price-label">MOST POPULAR</p><h3>Store Polish</h3><p class="price">$500</p>
+        <p class="price-summary">Improve your storefront and organize your catalog.</p>
+        <ul><li>Theme styling and up to 3 section or layout updates</li><li>Product image selection support, resizing, and upload for up to 15 products</li><li>SEO titles and meta descriptions for up to 15 products</li><li>Product metafields and collection categorization for up to 15 products</li><li>Setup for up to 2 third-party apps</li></ul>
+        <a href="#contact" class="price-cta">Ask about Store Polish</a>
+      </article>
+      <article class="price-card">
+        <p class="price-label">SMALL-STORE LAUNCH</p><h3>Shopify Launch</h3><p class="price">$1,000</p>
+        <p class="price-summary">Move a simple website and launch on Shopify with confidence.</p>
+        <ul><li>Connect your domain and set up a Shopify theme</li><li>Rebuild up to 5 key pages from your current website</li><li>Set up and categorize up to 20 products and collections</li><li>Product image preparation and upload for up to 20 products</li><li>SEO titles, meta descriptions, and product metafields for up to 20 products</li><li>Setup for up to 2 third-party apps and a handover walkthrough</li></ul>
+        <a href="#contact" class="price-cta">Plan a Shopify launch</a>
+      </article>
+    </div>
+    <div class="management-note"><strong>Want ongoing help?</strong> Shopify store management and maintenance starts at <strong>$200/month</strong> for up to 4 hours of updates and support. Extra hours or larger requests are quoted before work begins.</div>
+    <p class="pricing-note">Prices are starting points for the listed scope. Shopify plan fees, paid themes, app subscriptions, and other third-party costs are separate. Larger migrations involving extensive catalogs, customer or order history, or complex integrations are scoped separately.</p>
+  </section>
+
 <div class="blacksection">
   <section id="testimonials" class="section fade-in">
     <h2 class="whitetext">What My Clients Say 🇯🇵 🇦🇺 🇺🇸 🇸🇦 🇬🇧</h2>
@@ -60,7 +116,7 @@
           <p class="testimonial-text">
             “Working with Lia was an absolute pleasure. She built my Shopify store beautifully and guided me through every step.”
           </p>
-          <p class="testimonial-name">— Upwork Client</p>
+          <p class="testimonial-name">— Small business owner</p>
         </div>
   
         <!-- Slide 2 -->
@@ -70,7 +126,7 @@
             “She helped us do a Shopify store set up and the project was completed successfully. She has a good eye for design and got everything set up in the store the way we wanted it.
             A++.”
           </p>
-          <p class="testimonial-name">— Upwork Client</p>
+          <p class="testimonial-name">— Shopify store owner</p>
         </div>
   
         <!-- Slide 3 -->
@@ -79,7 +135,7 @@
           <p class="testimonial-text">
             “She helped us set up a new Shopify store and it was done perfectly.”
           </p>
-          <p class="testimonial-name">— Upwork Client</p>
+          <p class="testimonial-name">— Online retailer</p>
         </div>
   
         <!-- Slide 4 -->
@@ -88,7 +144,7 @@
           <p class="testimonial-text">
             “Lia has been a reliable Shopify developer and a great collaborator with me for over a year now. She has handled everything from simple Shopify related tasks to full store builds, consistently taking full responsibility and delivering solid results.”
           </p>
-          <p class="testimonial-name">— Zachary T. | Web Developer</p>
+          <p class="testimonial-name">— Web development partner</p>
         </div>
   
       </div>
@@ -97,34 +153,19 @@
     <!-- Dots for navigation -->
     <div id="carouselDots" class="carousel-dots"></div>
   </section>
-  <section id="progress-section" class="section fade-in">
-    <h2 class="whitetext">My Website Building Journey</h2>
-  
-    <p class="progress-text">
-      Goal: <strong>200 websites</strong> by 2027
-    </p>
-  
-    <div class="progress-container">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-      <p class="progress-count">
-        <span id="currentCount">24</span> / 200 completed
-      </p>
-    </div>
-    <br>
-  </section>
 </div>
 
 
   <section id="projects" class="section fade-in">
-    <h2>Projects</h2>
+    <p class="eyebrow">SELECTED WORK</p>
+    <h2>Made with care, for real businesses.</h2>
+    <p class="projects-intro">A few stores and websites I’ve helped bring to life.</p>
     <div class="projects-grid">
-      <div class="card"><p><a href="https://aznaturally.com/"><img src="AZ NATURALLY.png" alt="az naturally shop image"></a><a href="https://aznaturally.com/"><strong>AZ Naturally Shop</strong></a><br>An amazing store from a client in Texas. I'm all for organic beauty products. The owner's products are unique as they are tallow-based.</p></div>
-      <div class="card"><p><a href="https://www.ecozenwellbeing.com.au/"><img src="ECOZEN WELLBEING.png" alt="ecozen wellbeing shop image"></a><a href="https://www.ecozenwellbeing.com.au/"><strong>Ecozen Wellbeing</strong></a><br>A client from Australia providing high-quality organic products—try their magnesium range for natural relief and rejuvenation!</p></div>
-      <div class="card"><p><a href="https://wise-wakayama.com/"><img src="WISE WAKAYAMA.png" alt="wise wakayama school image"></a><a href="https://wise-wakayama.com/"><strong>Wakayama Wise</strong></a><br>An exciting project with a senior developer, managing a website for an international school in Wakayama, Japan.</p></div>
-      <div class="card"><p><a href="https://liacodev.github.io/book-club/"><img src="HC-BOOK-CLUB.png" alt="hc bookclub website by liacodev"></a><a href="https://liacodev.github.io/book-club/"><strong>HC Book Club</strong></a><br>I was inspired by the Sleepy Bookshelf and created this book website filled with classic stories.</p></div>
-      <div class="card"><p><a href="https://peopletree.co.jp/"><img src="People Tree.png" alt="people tree shop"></a><a href="https://peopletree.co.jp/"><strong>People Tree</strong></a><br>People Tree is a leading fair-trade fashion store in Japan offering ethically made, eco-friendly clothing and accessories.</p></div>
+      <article class="card project-card featured-project"><a class="project-image-link" href="https://aznaturally.com/" target="_blank" rel="noopener noreferrer"><img src="AZ NATURALLY.png" alt="AZ Naturally Shopify storefront"></a><div class="project-copy"><span class="project-kind">SHOPIFY · BEAUTY & WELLNESS</span><h3><a href="https://aznaturally.com/" target="_blank" rel="noopener noreferrer">AZ Naturally Shop <span aria-hidden="true">↗</span></a></h3><p>A Texas-based natural beauty brand with a distinctive tallow-based product range.</p></div></article>
+      <article class="card project-card"><a class="project-image-link" href="https://www.ecozenwellbeing.com.au/" target="_blank" rel="noopener noreferrer"><img src="ECOZEN WELLBEING.png" alt="Ecozen Wellbeing online store"></a><div class="project-copy"><span class="project-kind">SHOPIFY · WELLNESS</span><h3><a href="https://www.ecozenwellbeing.com.au/" target="_blank" rel="noopener noreferrer">Ecozen Wellbeing <span aria-hidden="true">↗</span></a></h3><p>An Australian wellbeing store featuring organic products and magnesium essentials.</p></div></article>
+      <article class="card project-card"><a class="project-image-link" href="https://wise-wakayama.com/" target="_blank" rel="noopener noreferrer"><img src="WISE WAKAYAMA.png" alt="WISE Wakayama international school website"></a><div class="project-copy"><span class="project-kind">WEB · EDUCATION</span><h3><a href="https://wise-wakayama.com/" target="_blank" rel="noopener noreferrer">WISE Wakayama <span aria-hidden="true">↗</span></a></h3><p>Website support for an international school in Wakayama, working alongside a senior developer.</p></div></article>
+      <article class="card project-card"><a class="project-image-link" href="https://liacodev.github.io/book-club/" target="_blank" rel="noopener noreferrer"><img src="HC-BOOK-CLUB.png" alt="HC Book Club website featuring classic stories"></a><div class="project-copy"><span class="project-kind">PERSONAL PROJECT · BOOKS</span><h3><a href="https://liacodev.github.io/book-club/" target="_blank" rel="noopener noreferrer">HC Book Club <span aria-hidden="true">↗</span></a></h3><p>A cozy reading corner for classic stories, inspired by the Sleepy Bookshelf.</p></div></article>
+      <article class="card project-card"><a class="project-image-link" href="https://peopletree.co.jp/" target="_blank" rel="noopener noreferrer"><img src="People Tree.png" alt="People Tree fair-trade fashion store"></a><div class="project-copy"><span class="project-kind">SHOPIFY · FAIR TRADE</span><h3><a href="https://peopletree.co.jp/" target="_blank" rel="noopener noreferrer">People Tree <span aria-hidden="true">↗</span></a></h3><p>A leading Japanese fair-trade fashion retailer focused on ethically made clothing.</p></div></article>
     </div>
   </section>
 
@@ -161,6 +202,7 @@ method="POST"
       <path d="m296-224-56-56 240-240 240 240-56 56-184-183-184 183Zm0-240-56-56 240-240 240 240-56 56-184-183-184 183Z"/>
     </svg>
   </button>
+  <button class="motion-toggle" id="motionToggle" type="button" aria-label="Turn off parallax"><span aria-hidden="true">◉</span><span class="motion-label">Motion on</span></button>
   
   <script src="script.js"></script>
 </body>

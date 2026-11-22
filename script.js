@@ -31,14 +31,133 @@ backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Adjust this number to how many websites you've completed
-const currentWebsites = 24;
-const goal = 200;
+// A small, optional stardust burst in the intro.
+const stardustButton = document.getElementById('stardustButton');
+if (stardustButton) {
+  stardustButton.addEventListener('click', () => {
+    const bounds = stardustButton.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const symbols = ['✦', '✧', '·', '✶'];
 
-const percentage = (currentWebsites / goal) * 100;
+    for (let i = 0; i < 14; i += 1) {
+      const spark = document.createElement('span');
+      const angle = (Math.PI * 2 * i) / 14;
+      const distance = 35 + Math.random() * 85;
+      spark.className = 'stardust';
+      spark.textContent = symbols[i % symbols.length];
+      spark.setAttribute('aria-hidden', 'true');
+      spark.style.left = `${centerX}px`;
+      spark.style.top = `${centerY}px`;
+      spark.style.setProperty('--spark-x', `${Math.cos(angle) * distance}px`);
+      spark.style.setProperty('--spark-y', `${Math.sin(angle) * distance}px`);
+      spark.style.setProperty('--spark-size', `${12 + Math.random() * 15}px`);
+      spark.addEventListener('animationend', () => spark.remove(), { once: true });
+      document.body.appendChild(spark);
+      window.setTimeout(() => spark.remove(), 1400);
+    }
 
-document.getElementById("currentCount").textContent = currentWebsites;
-document.getElementById("progressFill").style.width = percentage + "%";
+    stardustButton.textContent = 'A little more cosmic ✨';
+    window.setTimeout(() => {
+      stardustButton.textContent = '✦ Sprinkle a little stardust';
+    }, 1600);
+  });
+}
+
+// Keep the service directory usable with a mouse, touch, or keyboard.
+const serviceTabs = Array.from(document.querySelectorAll('.service-tab'));
+const serviceBubble = document.getElementById('serviceBubble');
+const serviceTitle = document.getElementById('serviceTitle');
+const serviceCopy = document.getElementById('serviceCopy');
+
+function selectServiceTab(tab, moveFocus = false) {
+  if (!tab || !serviceBubble || !serviceTitle || !serviceCopy) return;
+  serviceTabs.forEach(item => {
+    const selected = item === tab;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-selected', String(selected));
+    item.tabIndex = selected ? 0 : -1;
+  });
+
+  serviceBubble.setAttribute('aria-labelledby', tab.id);
+  const bubbleRect = serviceBubble.getBoundingClientRect();
+  const tabRect = tab.getBoundingClientRect();
+  const arrowX = Math.min(Math.max(tabRect.left + tabRect.width / 2 - bubbleRect.left - 8, 18), bubbleRect.width - 28);
+  serviceBubble.style.setProperty('--bubble-arrow-x', `${arrowX}px`);
+  serviceBubble.classList.add('updating');
+  window.setTimeout(() => {
+    serviceTitle.textContent = tab.dataset.title;
+    serviceCopy.textContent = tab.dataset.copy;
+    serviceBubble.classList.remove('updating');
+  }, 130);
+
+  if (moveFocus) {
+    tab.focus();
+    tab.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
+serviceTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => selectServiceTab(tab));
+  tab.addEventListener('keydown', event => {
+    let nextIndex = index;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % serviceTabs.length;
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + serviceTabs.length) % serviceTabs.length;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = serviceTabs.length - 1;
+    else return;
+    event.preventDefault();
+    selectServiceTab(serviceTabs[nextIndex], true);
+  });
+});
+
+// Parallax is on by default unless the visitor prefers reduced motion.
+// The fixed control lets them switch it off at any time; save their choice.
+const motionToggle = document.getElementById('motionToggle');
+const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let motionEnabled = !reducedMotionQuery.matches;
+try {
+  const savedMotion = window.localStorage.getItem('liacodev-parallax');
+  if (savedMotion === 'on') motionEnabled = true;
+  if (savedMotion === 'off') motionEnabled = false;
+} catch (error) {
+  // The visual control still works when storage is unavailable.
+}
+
+function updateParallax() {
+  if (!motionEnabled) return;
+  const scroll = window.scrollY || 0;
+  document.body.style.setProperty('--stars-shift', `${-scroll * 0.16}px`);
+  document.body.style.setProperty('--planet-shift', `${scroll * 0.1}px`);
+}
+
+function setParallax(enabled, remember = false) {
+  motionEnabled = enabled;
+  document.body.classList.toggle('motion-off', !motionEnabled);
+  if (motionToggle) {
+    motionToggle.querySelector('.motion-label').textContent = motionEnabled ? 'Motion on' : 'Motion off';
+    motionToggle.setAttribute('aria-label', motionEnabled ? 'Turn off parallax' : 'Turn on parallax');
+  }
+  if (remember) {
+    try { window.localStorage.setItem('liacodev-parallax', motionEnabled ? 'on' : 'off'); } catch (error) {}
+  }
+  if (motionEnabled) updateParallax();
+  else {
+    document.body.style.setProperty('--stars-shift', '0px');
+    document.body.style.setProperty('--planet-shift', '0px');
+  }
+}
+
+setParallax(motionEnabled);
+if (motionToggle) motionToggle.addEventListener('click', () => setParallax(!motionEnabled, true));
+let parallaxFrame = 0;
+window.addEventListener('scroll', () => {
+  if (!motionEnabled || parallaxFrame) return;
+  parallaxFrame = window.requestAnimationFrame(() => {
+    parallaxFrame = 0;
+    updateParallax();
+  });
+}, { passive: true });
 
 document.addEventListener('DOMContentLoaded', () => {
     const carousel = document.getElementById('testimonialCarousel');
