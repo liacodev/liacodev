@@ -14,9 +14,8 @@ body>br{display:none}
 .section{max-width:1160px;margin:0 auto;padding:88px 28px;opacity:1;transform:none;transition:opacity .7s,transform .7s}
 .fade-in{opacity:0;transform:translateY(16px)}.fade-in.show{opacity:1;transform:translateY(0)}
 #about{max-width:none;padding:0;background:var(--sage)}
-.about-container{max-width:1160px;min-height:510px;margin:auto;padding:82px 28px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:9%}
+.about-container{max-width:1160px;min-height:510px;margin:auto;padding:82px 28px;display:grid;grid-template-columns:1fr;align-items:center;gap:0}
 .about-card{background:none;padding:0;box-shadow:none;flex:auto;order:0}
-.about-card:before{content:'INDEPENDENT WEB DEVELOPER · JAPAN';display:block;color:#587566;font-size:.75rem;font-weight:700;letter-spacing:.13em;margin-bottom:20px}
 h2{font:600 clamp(2rem,4vw,3rem) 'Playfair Display',serif;line-height:1.15;margin:0 0 24px;text-align:left;color:var(--ink)}
 .about-card h2{font-size:clamp(2.8rem,5vw,4.4rem);max-width:650px;margin-bottom:22px}
 .about-card p{max-width:650px;color:#405b50;font-size:1.05rem}
@@ -66,7 +65,7 @@ h1,h2,h3,.price{font-family:'Space Grotesk',sans-serif;letter-spacing:-.025em}
 #about{position:relative;overflow:hidden;background:linear-gradient(135deg,#12152f 0%,#1a1e42 52%,#201a46 100%)}
 #about:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.7;background-image:radial-gradient(1px 1px at 12% 18%,#fff 98%,transparent),radial-gradient(1px 1px at 41% 31%,#c9a9ff 98%,transparent),radial-gradient(1px 1px at 77% 16%,#fff 98%,transparent),radial-gradient(1px 1px at 89% 61%,#d6c6ff 98%,transparent),radial-gradient(1px 1px at 28% 76%,#fff 98%,transparent),radial-gradient(1px 1px at 61% 83%,#c9d7ff 98%,transparent);background-size:380px 300px}
 #about:after{content:"";position:absolute;top:60px;right:calc(50% - 620px);width:420px;height:420px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 35% 32%,#9c81e8 0%,#584c9f 28%,#292653 56%,#171a38 72%);box-shadow:inset -26px -14px 50px rgba(6,7,26,.54),0 0 100px rgba(133,103,222,.24);opacity:.34}
-#about>*{position:relative;z-index:1}.about-container{min-height:550px}.about-card:before{color:#c1a9f1}.about-card h2{font-size:clamp(2.8rem,5.2vw,4.55rem);max-width:670px;line-height:1.06;color:#f3f1ff}.about-card p{color:#c6c9e4}.about-card p a{background:#9d7ce5;color:#11132b;border-radius:999px;padding:13px 22px;box-shadow:0 8px 28px rgba(157,124,229,.24)}.about-card p a:hover{background:#b69df2;transform:translateY(-2px)}
+#about>*{position:relative;z-index:1}.about-container{min-height:550px}.about-card h2{font-size:clamp(2.8rem,5.2vw,4.55rem);max-width:670px;line-height:1.06;color:#f3f1ff}.about-card p{color:#c6c9e4}.about-card p a{background:#9d7ce5;color:#11132b;border-radius:999px;padding:13px 22px;box-shadow:0 8px 28px rgba(157,124,229,.24)}.about-card p a:hover{background:#b69df2;transform:translateY(-2px)}
 #lia_pic{width:min(100%,280px);height:320px;border:1px solid rgba(229,220,255,.5);border-radius:48% 48% 18px 18px;box-shadow:0 0 0 10px rgba(211,197,255,.05),0 0 65px rgba(151,119,231,.25)}
 .landing-header h1{font-family:'Inter',sans-serif}.service-card h3,.price-card h3{font-family:'Space Grotesk',sans-serif}
 .social-links{background:rgba(10,12,30,.65);border-top:1px solid rgba(176,179,237,.15);color:#e5e4fb}.social-links a{color:#d1b9ff}.social-links p{font-size:.94rem}
