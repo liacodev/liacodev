@@ -134,6 +134,7 @@ function updateParallax() {
 function setParallax(enabled, remember = false) {
   motionEnabled = enabled;
   document.body.classList.toggle('motion-off', !motionEnabled);
+  document.dispatchEvent(new CustomEvent('motionpreferencechange'));
   if (motionToggle) {
     motionToggle.querySelector('.motion-label').textContent = motionEnabled ? 'Motion on' : 'Motion off';
     motionToggle.setAttribute('aria-label', motionEnabled ? 'Turn off parallax' : 'Turn on parallax');
@@ -282,33 +283,60 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
 }
 
 
-// Compact, keyboard-friendly 3D project carousel.
+// Compact, keyboard-friendly project deck with continuous motion.
 document.addEventListener('DOMContentLoaded', () => {
   const stage = document.getElementById('projectsStage');
   const ring = document.getElementById('projectsRing');
   if (!stage || !ring) return;
   const cards = Array.from(ring.querySelectorAll('.project-card'));
   const dots = document.getElementById('projectDots');
-  const count = document.getElementById('projectCount');
+  const captionKind = document.getElementById('projectCaptionKind');
+  const captionTitle = document.getElementById('projectCaptionTitle');
+  const captionCopy = document.getElementById('projectCaptionCopy');
   const pauseButton = document.getElementById('projectPause');
   const previous = document.getElementById('projectPrev');
   const next = document.getElementById('projectNext');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let current = 0;
-  let timer;
-  let paused = reducedMotion.matches;
+  const revolutionDuration = 30000;
+  let current = -1;
+  let phase = 0;
+  let frameId = 0;
+  let lastFrame = 0;
+  let manualPaused = false;
+  let settle = null;
+  function cardSpread() {
+    if (window.innerWidth <= 680) return 118;
+    if (window.innerWidth <= 900) return 120;
+    if (window.innerWidth <= 1100) return 150;
+    return 190;
+  }
   const indicators = cards.map((_, i) => {
     const button = document.createElement('button');
     button.type = 'button';
     button.setAttribute('aria-label', `Show project ${i + 1}`);
-    button.addEventListener('click', () => { show(i); restart(); });
+    button.addEventListener('click', () => navigate(i));
     dots.appendChild(button);
     return button;
   });
-  cards.forEach((card, i) => card.style.setProperty('--card-index', i));
-  function show(index) {
-    current = (index + cards.length) % cards.length;
-    ring.style.setProperty('--carousel-angle', `${-current * (360 / cards.length)}deg`);
+  function renderCards() {
+    cards.forEach((card, index) => {
+      let offset = index - phase;
+      offset = ((offset + cards.length / 2) % cards.length + cards.length) % cards.length - cards.length / 2;
+      const depth = Math.abs(offset);
+      const x = offset * cardSpread();
+      const y = depth * 14 - Math.max(0, depth - 1) * 34;
+      const rotation = -offset * 3.2;
+      const scale = Math.max(.58, 1 - depth * .12);
+      card.style.transform = `translate3d(calc(-50% + ${x}px), ${y}px, 0) rotate(${rotation}deg) scale(${scale})`;
+      card.style.opacity = String(Math.max(.28, 1 - depth * .34));
+      card.style.filter = `saturate(${Math.max(.48, 1 - depth * .2)}) brightness(${Math.max(.56, 1 - depth * .18)})`;
+      card.style.zIndex = String(100 - Math.round(depth * 10));
+    });
+  }
+  function updateCurrent(index) {
+    const nextCurrent = (index + cards.length) % cards.length;
+    if (nextCurrent === current) return;
+    current = nextCurrent;
     cards.forEach((card, i) => {
       const active = i === current;
       card.classList.toggle('is-active', active);
@@ -317,37 +345,90 @@ document.addEventListener('DOMContentLoaded', () => {
       indicators[i].classList.toggle('active', active);
       indicators[i].setAttribute('aria-current', active ? 'true' : 'false');
     });
-    count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    const source = cards[current].querySelector('.project-copy');
+    const sourceTitle = source?.querySelector('h3 a');
+    captionKind.textContent = source?.querySelector('.project-kind')?.textContent ?? '';
+    captionTitle.href = sourceTitle?.href ?? '#projects';
+    captionTitle.textContent = sourceTitle?.textContent.replace('↗', '').trim() ?? '';
+    captionCopy.textContent = source?.querySelector('p')?.textContent ?? '';
   }
-  function stop() { window.clearInterval(timer); timer = null; }
-  function start() {
-    stop();
-    if (!paused && !reducedMotion.matches && !document.body.classList.contains('motion-off')) {
-      timer = window.setInterval(() => show(current + 1), 5200);
-    }
+  function canAnimate() {
+    return !manualPaused && !reducedMotion.matches && !document.body.classList.contains('motion-off');
+  }
+  function syncPauseButton() {
+    const paused = !canAnimate();
     pauseButton.textContent = paused ? 'Play' : 'Pause';
     pauseButton.setAttribute('aria-pressed', String(paused));
     pauseButton.setAttribute('aria-label', paused ? 'Resume carousel rotation' : 'Pause carousel rotation');
   }
-  function restart() { start(); }
-  previous.addEventListener('click', () => { show(current - 1); restart(); });
-  next.addEventListener('click', () => { show(current + 1); restart(); });
-  pauseButton.addEventListener('click', () => { paused = !paused; start(); });
-  stage.addEventListener('mouseenter', stop);
-  stage.addEventListener('mouseleave', start);
-  stage.addEventListener('focusin', stop);
-  stage.addEventListener('focusout', event => { if (!stage.contains(event.relatedTarget)) start(); });
+  function stop() {
+    if (frameId) window.cancelAnimationFrame(frameId);
+    frameId = 0;
+    lastFrame = 0;
+    syncPauseButton();
+  }
+  function tick(timestamp) {
+    frameId = 0;
+    if (!canAnimate()) { lastFrame = 0; syncPauseButton(); return; }
+    const elapsed = lastFrame ? Math.min(timestamp - lastFrame, 40) : 0;
+    lastFrame = timestamp;
+
+    if (settle) {
+      settle.elapsed += elapsed;
+      const progress = Math.min(settle.elapsed / 650, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      phase = settle.from + (settle.to - settle.from) * eased;
+      if (progress === 1) settle = null;
+    } else {
+      phase += elapsed * cards.length / revolutionDuration;
+    }
+
+    renderCards();
+    const centeredIndex = Math.round(phase);
+    updateCurrent(centeredIndex);
+    frameId = window.requestAnimationFrame(tick);
+  }
+  function start() {
+    syncPauseButton();
+    if (canAnimate() && !frameId) frameId = window.requestAnimationFrame(tick);
+  }
+  function navigate(index) {
+    const destination = (index + cards.length) % cards.length;
+    const targetPhase = destination + cards.length * Math.round((phase - destination) / cards.length);
+    if (!canAnimate()) {
+      phase = targetPhase;
+      settle = null;
+      renderCards();
+      updateCurrent(destination);
+      return;
+    }
+    settle = { from: phase, to: targetPhase, elapsed: 0 };
+    start();
+  }
+  pauseButton.addEventListener('click', () => {
+    manualPaused = !manualPaused;
+    if (canAnimate()) start(); else stop();
+  });
+  previous.addEventListener('click', () => navigate(current - 1));
+  next.addEventListener('click', () => navigate(current + 1));
+  document.addEventListener('motionpreferencechange', () => {
+    if (canAnimate()) start(); else stop();
+  });
+  reducedMotion.addEventListener?.('change', () => {
+    if (canAnimate()) start(); else stop();
+  });
+  window.addEventListener('resize', renderCards, { passive: true });
   stage.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') { show(current - 1); restart(); }
-    if (event.key === 'ArrowRight') { show(current + 1); restart(); }
+    if (event.key === 'ArrowLeft') navigate(current - 1);
+    if (event.key === 'ArrowRight') navigate(current + 1);
   });
   let touchStartX = 0;
   stage.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
   stage.addEventListener('touchend', event => {
     const delta = event.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(delta) > 45) { show(current + (delta < 0 ? 1 : -1)); restart(); }
+    if (Math.abs(delta) > 45) navigate(current + (delta < 0 ? 1 : -1));
   }, { passive: true });
-  reducedMotion.addEventListener?.('change', () => { if (reducedMotion.matches) paused = true; start(); });
-  show(0);
+  updateCurrent(0);
+  renderCards();
   start();
 });

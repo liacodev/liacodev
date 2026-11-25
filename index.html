@@ -9,9 +9,6 @@
   <meta property="og:description" content="Liacodev | Web Developer & Shopify Specialist"/>
   <meta property="og:image" content="https://liacodev.com/images/liacodev_logo.png">
   <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
@@ -91,7 +88,10 @@
 
 <div class="blacksection">
   <section id="testimonials" class="section fade-in">
-    <h2 class="whitetext">What My Clients Say 🇯🇵 🇦🇺 🇺🇸 🇸🇦 🇬🇧</h2>
+    <div class="testimonial-heading">
+      <p class="eyebrow">REVIEWS FROM AROUND THE WORLD</p>
+      <h2 class="whitetext">Kind words from people I’ve worked with.</h2>
+    </div>
   
     <div class="carousel-container">
       <div id="testimonialCarousel" class="carousel">
@@ -152,13 +152,17 @@
       <article class="card project-card"><a class="project-image-link" href="https://liacodev.github.io/book-club/" target="_blank" rel="noopener noreferrer"><img src="HC-BOOK-CLUB.png" alt="HC Book Club website featuring classic stories"></a><div class="project-copy"><span class="project-kind">PERSONAL PROJECT · BOOKS</span><h3><a href="https://liacodev.github.io/book-club/" target="_blank" rel="noopener noreferrer">HC Book Club <span aria-hidden="true">↗</span></a></h3><p>A cozy reading corner for classic stories, inspired by the Sleepy Bookshelf.</p></div></article>
       <article class="card project-card"><a class="project-image-link" href="https://peopletree.co.jp/" target="_blank" rel="noopener noreferrer"><img src="People Tree.png" alt="People Tree fair-trade fashion store"></a><div class="project-copy"><span class="project-kind">SHOPIFY · FAIR TRADE</span><h3><a href="https://peopletree.co.jp/" target="_blank" rel="noopener noreferrer">People Tree <span aria-hidden="true">↗</span></a></h3><p>A leading Japanese fair-trade fashion retailer focused on ethically made clothing.</p></div></article>
       </div>
+      <div class="project-caption" id="projectCaption">
+        <span class="project-kind" id="projectCaptionKind"></span>
+        <h3><a id="projectCaptionTitle" target="_blank" rel="noopener noreferrer"></a></h3>
+        <p id="projectCaptionCopy"></p>
+      </div>
       <div class="project-controls" aria-label="Project carousel controls">
         <button type="button" class="project-arrow" id="projectPrev" aria-label="Previous project">←</button>
         <div class="project-dots" id="projectDots" aria-label="Choose a project"></div>
         <button type="button" class="project-arrow" id="projectNext" aria-label="Next project">→</button>
         <button type="button" class="project-pause" id="projectPause" aria-pressed="false">Pause</button>
       </div>
-      <p class="project-count" id="projectCount" aria-live="polite">01 / 05</p>
     </div>
   </section>
 
@@ -167,21 +171,18 @@
       <div class="contact-intro">
         <p class="eyebrow">LET’S MAKE IT REAL</p>
         <h2 class="aboutmetext">Have a project in mind?</h2>
-        <p>Tell me a little about what you’re building. I’ll get back to you with a thoughtful next step.</p>
-        <p class="contact-prompt"><span aria-hidden="true">01</span> Pick a starting point and tell me a little more.</p>
-        <div class="contact-orbit" aria-hidden="true"><span>IDEA</span><b>↗</b><i>LIVE</i></div>
+        <p>Tell me about what you're building. I'd like to help you reach your goal and make your ideas come to life!</p>
       </div>
       <form class="contact-form" action="https://formspree.io/f/xzzqznjp" method="POST">
         <label>Your email<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
         <label>What do you need?
           <select name="projectType" required>
             <option value="" disabled selected>Choose a project type</option>
-            <option>Shopify store setup</option><option>Theme design or development</option><option>Website design or development</option><option>Ongoing support</option><option>Something else</option>
+            <option>Shopify store setup</option><option>Website design or development</option><option>Ongoing support</option><option>Something else</option>
           </select>
         </label>
-        <label class="message-label">A little about your project<textarea name="message" placeholder="What are you hoping to create?" required></textarea></label>
+        <label class="message-label">Message<textarea name="message" placeholder="I want to discuss building a small clothing business." required></textarea></label>
         <button type="submit">Send project details <span aria-hidden="true">↗</span></button>
-        <p class="form-note">No pressure or commitment. Just a place to start.</p>
       </form>
     </div>
   </section>
