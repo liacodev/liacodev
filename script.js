@@ -57,9 +57,9 @@ if (stardustButton) {
       window.setTimeout(() => spark.remove(), 1400);
     }
 
-    stardustButton.textContent = 'A little more cosmic ✨';
+    stardustButton.textContent = '✨ Let’s make something cosmic!';
     window.setTimeout(() => {
-      stardustButton.textContent = '✦ Sprinkle a little stardust';
+      stardustButton.textContent = '✦ Excited to build with you!';
     }, 1600);
   });
 }
@@ -253,3 +253,101 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoSlide();
   });
 
+
+// A slim reading-progress line adds a quiet interface detail and helps visitors track long pages.
+const scrollProgress = document.getElementById('scrollProgress');
+let progressFrame = 0;
+function updateScrollProgress() {
+  if (!scrollProgress || progressFrame) return;
+  progressFrame = window.requestAnimationFrame(() => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    scrollProgress.style.width = `${Math.min(progress, 100)}%`;
+    progressFrame = 0;
+  });
+}
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress);
+updateScrollProgress();
+
+// Project cards get a soft, pointer-following lilac glow on devices with a fine pointer.
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('pointermove', event => {
+      const bounds = card.getBoundingClientRect();
+      card.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
+      card.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
+    });
+  });
+}
+
+
+// Compact, keyboard-friendly 3D project carousel.
+document.addEventListener('DOMContentLoaded', () => {
+  const stage = document.getElementById('projectsStage');
+  const ring = document.getElementById('projectsRing');
+  if (!stage || !ring) return;
+  const cards = Array.from(ring.querySelectorAll('.project-card'));
+  const dots = document.getElementById('projectDots');
+  const count = document.getElementById('projectCount');
+  const pauseButton = document.getElementById('projectPause');
+  const previous = document.getElementById('projectPrev');
+  const next = document.getElementById('projectNext');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let current = 0;
+  let timer;
+  let paused = reducedMotion.matches;
+  const indicators = cards.map((_, i) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-label', `Show project ${i + 1}`);
+    button.addEventListener('click', () => { show(i); restart(); });
+    dots.appendChild(button);
+    return button;
+  });
+  cards.forEach((card, i) => card.style.setProperty('--card-index', i));
+  function show(index) {
+    current = (index + cards.length) % cards.length;
+    ring.style.setProperty('--carousel-angle', `${-current * (360 / cards.length)}deg`);
+    cards.forEach((card, i) => {
+      const active = i === current;
+      card.classList.toggle('is-active', active);
+      card.setAttribute('aria-hidden', String(!active));
+      card.inert = !active;
+      indicators[i].classList.toggle('active', active);
+      indicators[i].setAttribute('aria-current', active ? 'true' : 'false');
+    });
+    count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+  }
+  function stop() { window.clearInterval(timer); timer = null; }
+  function start() {
+    stop();
+    if (!paused && !reducedMotion.matches && !document.body.classList.contains('motion-off')) {
+      timer = window.setInterval(() => show(current + 1), 5200);
+    }
+    pauseButton.textContent = paused ? 'Play' : 'Pause';
+    pauseButton.setAttribute('aria-pressed', String(paused));
+    pauseButton.setAttribute('aria-label', paused ? 'Resume carousel rotation' : 'Pause carousel rotation');
+  }
+  function restart() { start(); }
+  previous.addEventListener('click', () => { show(current - 1); restart(); });
+  next.addEventListener('click', () => { show(current + 1); restart(); });
+  pauseButton.addEventListener('click', () => { paused = !paused; start(); });
+  stage.addEventListener('mouseenter', stop);
+  stage.addEventListener('mouseleave', start);
+  stage.addEventListener('focusin', stop);
+  stage.addEventListener('focusout', event => { if (!stage.contains(event.relatedTarget)) start(); });
+  stage.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { show(current - 1); restart(); }
+    if (event.key === 'ArrowRight') { show(current + 1); restart(); }
+  });
+  let touchStartX = 0;
+  stage.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', event => {
+    const delta = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) > 45) { show(current + (delta < 0 ? 1 : -1)); restart(); }
+  }, { passive: true });
+  reducedMotion.addEventListener?.('change', () => { if (reducedMotion.matches) paused = true; start(); });
+  show(0);
+  start();
+});

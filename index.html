@@ -14,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
 
   <!-- Menu -->
   <header class="landing-header">
@@ -33,9 +34,24 @@
     <div class="about-container">
       <div class="about-card">
         <h2>Let's build your website.</h2>
-        <p>Hi, I'm Lia, a web developer in Japan. With experience in marketing, tech, and entrepreneurship, I can help you build a website that showcases your products and skills.</p>
+        <p>Shopify store development for small businesses and growing brands.</p>
+        <div class="hero-techline" aria-label="Shopify, Liquid, and web development">
+          <span>SHOPIFY</span><span>LIQUID</span><span>WEB DEVELOPMENT</span><span aria-hidden="true">✧</span>
+        </div>
         <p><a href="#services">Explore services</a></p>
-        <button class="stardust-trigger" id="stardustButton" type="button" aria-label="Excited to build with you!">✦</button>
+        <a class="hero-contact-link" href="#contact">Have a project in mind? Let’s talk. <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="browser-window">
+          <div class="browser-top"><div class="browser-dots"><i></i><i></i><i></i></div><span>your-next-site.page</span><span class="browser-menu">•••</span></div>
+          <div class="mock-site">
+            <div class="mock-nav"><b>your brand</b><span>ABOUT</span><span>SHOP</span><span>CONTACT</span></div>
+            <div class="mock-hero"><div class="mock-copy"><small>MADE FOR REAL LIFE</small><strong>A good idea,<br>made simple.</strong><p>A little space for what matters.</p><span class="mock-button">EXPLORE <b>↗</b></span></div><div class="mock-art"><i></i><b></b><span></span></div></div>
+            <div class="mock-footer"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <div class="code-note"><span>HTML</span><code>&lt;h1&gt;Hello, world&lt;/h1&gt;</code><b>✓</b></div>
+        <span class="cursor-dot"></span>
       </div>
     </div>
     <div class="social-links">
@@ -49,30 +65,28 @@
   <br>
   <br>
   <section id="services" class="section fade-in">
-    <p class="eyebrow">SERVICES & PRICING</p>
-    <h2>Clear options for your next step.</h2>
-    <p class="services-intro">Already know what you need? Send me the details. I’ll confirm the scope and price before we start.</p>
-    <div class="pricing-grid">
-      <article class="price-card">
-        <p class="price-label">SHOPIFY SETUP</p><h3>Simple store setup</h3><p class="price">From $300</p>
-        <p class="price-summary">A theme-based Shopify store using your content and branding.</p>
-        <ul><li>Core theme and store settings</li><li>Up to 3 key pages for a small-store launch: $500</li><li>Catalog size and extra features affect the final quote</li></ul>
-        <a href="#contact" class="price-cta">Ask about a Shopify launch</a>
-      </article>
-      <article class="price-card featured">
-        <p class="price-label">UPDATES & SUPPORT</p><h3>Store maintenance</h3><p class="price">From $100</p>
-        <p class="price-summary">Small fixes, updates, and Shopify help based on what you need.</p>
-        <ul><li>Tell me the task or support you need</li><li>I’ll confirm the scope and price before starting</li></ul>
-        <a href="#contact" class="price-cta">Request a quote</a>
-      </article>
-      <article class="price-card">
-        <p class="price-label">CUSTOM PROJECTS</p><h3>Custom website or Shopify build</h3><p class="price">From $1,000</p>
-        <p class="price-summary">For more complex design, migration, or custom-feature work.</p>
-        <ul><li>Pricing depends on pages, products, and features</li><li>Let’s discuss your goals for a clear estimate</li></ul>
-        <a href="#contact" class="price-cta">Discuss your project</a>
-      </article>
+    <p class="eyebrow">SERVICES</p>
+    <h2>Thoughtful support for your next digital project.</h2>
+    <p class="services-intro">Choose a service to explore, or contact me with the project you already have in mind. I’ll help you work out the next step.</p>
+    <div class="service-directory">
+      <div class="service-tabs" role="tablist" aria-label="Explore services">
+        <button class="service-tab active" id="tab-setup" role="tab" aria-selected="true" aria-controls="serviceBubble" tabindex="0" data-title="Shopify setup &amp; launch" data-copy="Get your Shopify store ready to welcome customers. I can configure your theme, core settings, products, collections, and key pages using your content and branding.">Shopify setup</button>
+        <button class="service-tab" id="tab-theme" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Theme design &amp; development" data-copy="Make your storefront feel like your brand. I can refine layouts, colors, typography, and mobile details, or build custom Shopify theme sections with Liquid, HTML, CSS, and JavaScript.">Theme design</button>
+        <button class="service-tab" id="tab-features" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Custom features &amp; integrations" data-copy="Add useful features to your store, connect apps, and improve how tools work together. I’ll help find a practical solution for the way your business runs.">Custom features</button>
+        <button class="service-tab" id="tab-care" role="tab" aria-selected="false" aria-controls="serviceBubble" tabindex="-1" data-title="Web maintenance &amp; support" data-copy="Keep your website or Shopify store in good shape with updates, fixes, catalog help, and ongoing support tailored to what you need.">Maintenance</button>
+      </div>
+      <div class="service-bubble" id="serviceBubble" role="tabpanel" aria-labelledby="tab-setup" aria-live="polite" tabindex="0">
+        <span class="bubble-spark" aria-hidden="true">✦</span>
+        <h3 id="serviceTitle">Shopify setup &amp; launch</h3>
+        <p id="serviceCopy">Get your Shopify store ready to welcome customers. I can configure your theme, core settings, products, collections, and key pages using your content and branding.</p>
+        <a href="#contact" class="bubble-link">Tell me what you need <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
-    <p class="pricing-note">Shopify plan fees, paid themes, app subscriptions, and other third-party costs are separate. I’ll agree on the scope and quote with you before work begins.</p>
+    <div class="proof-strip">
+      <div><strong>24</strong><span>websites + ongoing projects</span></div>
+      <p>Shopify experience supporting stores in multi-million-dollar ecommerce businesses.</p>
+    </div>
+    <div class="service-contact-note"><span aria-hidden="true">//</span> Already know what you need? <a href="#contact">Tell me about your project</a> and I’ll get back to you with next steps.</div>
   </section>
 
 <div class="blacksection">
@@ -129,38 +143,47 @@
 
 
   <section id="projects" class="section fade-in">
-    <p class="eyebrow">SELECTED WORK</p>
-    <h2>Made with care, for real businesses.</h2>
-    <p class="projects-intro">A few stores and websites I’ve helped bring to life.</p>
-    <div class="projects-grid">
+    <h2>Shopify Stores and websites I've helped bring to life.</h2>
+    <div class="projects-stage" id="projectsStage" role="region" aria-roledescription="carousel" aria-label="Shopify stores and websites I’ve helped bring to life">
+      <div class="projects-grid projects-ring" id="projectsRing">
       <article class="card project-card featured-project"><a class="project-image-link" href="https://aznaturally.com/" target="_blank" rel="noopener noreferrer"><img src="AZ NATURALLY.png" alt="AZ Naturally Shopify storefront"></a><div class="project-copy"><span class="project-kind">SHOPIFY · BEAUTY & WELLNESS</span><h3><a href="https://aznaturally.com/" target="_blank" rel="noopener noreferrer">AZ Naturally Shop <span aria-hidden="true">↗</span></a></h3><p>A Texas-based natural beauty brand with a distinctive tallow-based product range.</p></div></article>
       <article class="card project-card"><a class="project-image-link" href="https://www.ecozenwellbeing.com.au/" target="_blank" rel="noopener noreferrer"><img src="ECOZEN WELLBEING.png" alt="Ecozen Wellbeing online store"></a><div class="project-copy"><span class="project-kind">SHOPIFY · WELLNESS</span><h3><a href="https://www.ecozenwellbeing.com.au/" target="_blank" rel="noopener noreferrer">Ecozen Wellbeing <span aria-hidden="true">↗</span></a></h3><p>An Australian wellbeing store featuring organic products and magnesium essentials.</p></div></article>
       <article class="card project-card"><a class="project-image-link" href="https://wise-wakayama.com/" target="_blank" rel="noopener noreferrer"><img src="WISE WAKAYAMA.png" alt="WISE Wakayama international school website"></a><div class="project-copy"><span class="project-kind">WEB · EDUCATION</span><h3><a href="https://wise-wakayama.com/" target="_blank" rel="noopener noreferrer">WISE Wakayama <span aria-hidden="true">↗</span></a></h3><p>Website support for an international school in Wakayama, working alongside a senior developer.</p></div></article>
       <article class="card project-card"><a class="project-image-link" href="https://liacodev.github.io/book-club/" target="_blank" rel="noopener noreferrer"><img src="HC-BOOK-CLUB.png" alt="HC Book Club website featuring classic stories"></a><div class="project-copy"><span class="project-kind">PERSONAL PROJECT · BOOKS</span><h3><a href="https://liacodev.github.io/book-club/" target="_blank" rel="noopener noreferrer">HC Book Club <span aria-hidden="true">↗</span></a></h3><p>A cozy reading corner for classic stories, inspired by the Sleepy Bookshelf.</p></div></article>
       <article class="card project-card"><a class="project-image-link" href="https://peopletree.co.jp/" target="_blank" rel="noopener noreferrer"><img src="People Tree.png" alt="People Tree fair-trade fashion store"></a><div class="project-copy"><span class="project-kind">SHOPIFY · FAIR TRADE</span><h3><a href="https://peopletree.co.jp/" target="_blank" rel="noopener noreferrer">People Tree <span aria-hidden="true">↗</span></a></h3><p>A leading Japanese fair-trade fashion retailer focused on ethically made clothing.</p></div></article>
+      </div>
+      <div class="project-controls" aria-label="Project carousel controls">
+        <button type="button" class="project-arrow" id="projectPrev" aria-label="Previous project">←</button>
+        <div class="project-dots" id="projectDots" aria-label="Choose a project"></div>
+        <button type="button" class="project-arrow" id="projectNext" aria-label="Next project">→</button>
+        <button type="button" class="project-pause" id="projectPause" aria-pressed="false">Pause</button>
+      </div>
+      <p class="project-count" id="projectCount" aria-live="polite">01 / 05</p>
     </div>
   </section>
 
-
-
-
   <section id="contact" class="section fade-in">
-    <h2 class="aboutmetext">Contact</h2>
-<form
-action="https://formspree.io/f/xzzqznjp"
-method="POST"
->
-<label>
-  Your email:
-  <input type="email" name="email">
-</label>
-<label>
-  Your message:
-  <textarea name="message"></textarea>
-</label>
-<!-- Send -->
-<button type="submit">Send</button>
-</form>
+    <div class="contact-layout">
+      <div class="contact-intro">
+        <p class="eyebrow">LET’S MAKE IT REAL</p>
+        <h2 class="aboutmetext">Have a project in mind?</h2>
+        <p>Tell me a little about what you’re building. I’ll get back to you with a thoughtful next step.</p>
+        <p class="contact-prompt"><span aria-hidden="true">01</span> Pick a starting point and tell me a little more.</p>
+        <div class="contact-orbit" aria-hidden="true"><span>IDEA</span><b>↗</b><i>LIVE</i></div>
+      </div>
+      <form class="contact-form" action="https://formspree.io/f/xzzqznjp" method="POST">
+        <label>Your email<input type="email" name="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>What do you need?
+          <select name="projectType" required>
+            <option value="" disabled selected>Choose a project type</option>
+            <option>Shopify store setup</option><option>Theme design or development</option><option>Website design or development</option><option>Ongoing support</option><option>Something else</option>
+          </select>
+        </label>
+        <label class="message-label">A little about your project<textarea name="message" placeholder="What are you hoping to create?" required></textarea></label>
+        <button type="submit">Send project details <span aria-hidden="true">↗</span></button>
+        <p class="form-note">No pressure or commitment. Just a place to start.</p>
+      </form>
+    </div>
   </section>
 
   <footer>
